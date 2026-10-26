@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" data-theme="meadow">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#4aa9ee">
+  <meta name="description" content="A stone, a little balance, and a very long way up. Play Stack Stones in your browser and find your place in the World Top 100.">
+  <title>Stack Stones · The sky is not the limit.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/32c8e947849ff489768e.svg">
+  <style>:root{--control-bg:#9cd818;--control-hover:#b1e43d;--control-border:#c4ec73;--control-hover-border:#def4a2;--control-shadow:#638d18;--control-ink:#263f2c;--control-ring:#547124;--control-icon:#d6efa0;}
+@font-face{font-family:Inter;src:url('assets/e46377b55ceb5eb21e16.woff') format('woff');font-weight:100 900;font-style:normal;font-display:swap}
+:root{font-family:Inter,Arial,sans-serif;color:#24432e;background:#4aa9ee;font-synthesis:none;--ink:#24432e;--sky:#4aa9ee;--cloud:#fafdff;--meadow:#9cd818;--sunflower:#f3cc46;--line:#24432e24;--muted:#617763}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:linear-gradient(155deg,#3297e2 0,#4aa9ee 35%,#77c7f1 72%);overflow-x:clip}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:5px}
+img{display:block;max-width:100%}
+button:disabled{opacity:.5;cursor:wait}
+[hidden]{display:none!important}
+.skip{position:absolute;left:20px;top:-70px;background:var(--ink);color:var(--cloud);padding:14px 20px;border-radius:16px;z-index:10}
+.skip:focus{top:15px}
+.masthead{position:relative;z-index:2;max-width:1460px;margin:auto;padding:28px 6%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:850;font-size:24px;letter-spacing:-.045em;white-space:nowrap;color:var(--cloud)}
+.wordmark svg{width:28px;height:30px;fill:currentColor}
+nav{display:flex;align-items:center;gap:30px;font-size:13px;font-weight:750}
+.nav-scores{display:flex;align-items:center;gap:13px;min-height:44px}
+.nav-scores:hover{color:var(--cloud)}
+.nav-play,.button,.board-top button{display:inline-flex;align-items:center;justify-content:space-between;background:var(--control-bg);color:var(--control-ink);border:2px solid var(--control-border);box-shadow:0 4px 0 var(--control-shadow);font-weight:800;transition:background .16s,box-shadow .16s}
+.nav-play{border-radius:16px;padding:11px 19px;min-height:46px;gap:23px}
+.nav-play span{font-size:20px;line-height:1}
+.nav-play:hover,.button:hover,.board-top button:hover{background:var(--control-hover)}
+.nav-play:active,.button:active,.board-top button:active{box-shadow:0 1px 0 var(--control-shadow)}
+.hero{position:relative;isolation:isolate;padding-bottom:68px}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr 1fr;gap:6%;align-items:center;max-width:1460px;margin:auto;padding:22px 6% 44px;min-height:660px}
+.hero-copy{position:relative;z-index:1;padding-bottom:20px}
+.eyebrow,.section-label{font-size:10px;font-weight:750;letter-spacing:.12em;line-height:1.8;margin:0 0 30px}
+.eyebrow{display:flex;align-items:center;gap:9px;letter-spacing:.105em;font-size:9px}
+.eyebrow>span{width:10px;height:10px;flex:none;border-radius:50%;background:var(--sunflower)}
+h1{font-size:clamp(84px,10.6vw,165px);font-weight:900;line-height:.84;letter-spacing:-.055em;margin:0 0 30px;color:var(--cloud)}
+.period{color:var(--sunflower)}
+.claim{font-size:clamp(18px,1.9vw,27px);letter-spacing:-.035em;font-weight:600;margin:0 0 34px;line-height:1.45}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:27px}
+.button{gap:36px;min-height:58px;padding:17px 24px;font-size:14px;letter-spacing:-.015em;border-radius:20px}
+.button>span{font-size:24px;line-height:1}
+.text-link{display:inline-flex;align-items:center;gap:19px;min-height:44px;font-size:12px;font-weight:750;border-bottom:1px solid #24432e66;padding:8px 0}
+.text-link:hover{border-color:var(--ink)}
+.play-note{font-size:10px;font-weight:550;line-height:1.7;margin:20px 0 0;color:#264c39}
+.hero-scene{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:.82;background:#65b4e6;min-width:0;width:100%;max-width:510px;margin:0 0 0 auto;border:5px solid #fffdf3cc;border-radius:46% 46% 28px 28px / 27% 27% 28px 28px;box-shadow:0 12px 0 #2b79b214}
+.scene-image{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.scene-caption{position:absolute;right:17px;top:38%;writing-mode:vertical-rl;font-size:8px;font-weight:650;letter-spacing:.15em;color:var(--cloud)}
+.hero-clouds{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.cloud{position:absolute;display:block;aspect-ratio:2.4;background-image:url('assets/67d9eb1ab9ecc736ff49.webp');background-size:300% 100%;background-repeat:no-repeat;pointer-events:none}
+.cloud-one{width:190px;left:43%;top:1%;background-position:0 50%;transform:rotate(-3deg)}
+.cloud-two{width:235px;left:-40px;bottom:39px;background-position:50% 50%;opacity:.95}
+.cloud-three{width:195px;right:-50px;top:32%;background-position:100% 50%;transform:rotate(3deg)}
+.sun{position:absolute;width:116px;height:116px;border-radius:50%;background:var(--sunflower);left:48%;top:13%;opacity:.95}
+.meadow-edge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:72px;display:block;fill:var(--meadow);pointer-events:none}
+.how{position:relative;z-index:1;background:var(--meadow);padding:30px 6% 78px}
+.how-inner{max-width:1285px;margin:auto}
+.how .section-label{margin-bottom:10px;font-size:9px}
+.how h2{font-size:clamp(34px,4.1vw,55px);font-weight:850;line-height:1.08;letter-spacing:-.05em;margin:0 0 42px}
+.instructions{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.instruction{display:flex;align-items:flex-start;gap:17px}
+.step-number{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:17px;background:var(--sunflower);color:var(--ink);font-size:13px;font-weight:850;letter-spacing:-.03em;box-shadow:0 3px 0 #86b927}
+.instruction h3{margin:0 0 8px;font-size:25px;font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.instruction p{font-size:12px;font-weight:500;line-height:1.7;margin:0;max-width:235px;color:#36562b}
+.ranking{position:relative;isolation:isolate;overflow:hidden;background:var(--cloud);padding:100px 6% 106px;scroll-margin-top:0}
+.ranking-inner{max-width:1285px;margin:auto;display:grid;grid-template-columns:.92fr 1.15fr;gap:11%;position:relative;z-index:1}
+.ranking .section-label{font-size:9px;margin-bottom:27px}
+.ranking h2{font-size:clamp(64px,7.5vw,106px);font-weight:850;line-height:.91;letter-spacing:-.06em;margin:0 0 29px}
+.ranking .period{color:var(--meadow)}
+.ranking-intro>p:not(.section-label){font-size:18px;font-weight:550;line-height:1.6;letter-spacing:-.02em;color:#3c5b41}
+.ranking-intro .sharing-note{font-size:12px!important;font-weight:450!important;margin-top:25px;letter-spacing:0!important;color:var(--muted)!important}
+.ranking-intro .text-link{margin-top:8px}
+.ranking-board{min-width:0;align-self:start;background:#fff;border:2px solid #e1eacb;border-radius:28px;padding:22px 25px 16px;box-shadow:0 8px 0 #e6efd721}
+.board-top{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:44px;margin-bottom:20px}
+.board-top p{font-size:10px;line-height:1.7;color:var(--muted);margin:0;max-width:220px}
+.board-top button{border-radius:15px;padding:10px 13px;min-height:43px;font-size:10px;white-space:nowrap;gap:10px;box-shadow:0 2px 0 var(--control-shadow)}
+.board-top button span{font-size:20px;line-height:1}
+table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left}
+th{font-size:10px;font-weight:700;letter-spacing:0;padding:13px 0;border-bottom:2px solid #dce7c4;color:#6b7c59}
+td{font-size:14px;font-weight:550;padding:19px 0;border-bottom:1px solid var(--line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{width:51px;color:#85956c;font-size:11px}
+td:nth-child(2){padding-right:12px}
+tbody tr:first-child .number{font-size:20px;font-weight:850;letter-spacing:-.04em;color:#456a22}
+.number{text-align:right;width:88px;font-weight:750}
+.empty{text-align:center;padding:28px 0 31px}
+.empty>svg{width:49px;height:47px;fill:var(--meadow);margin:auto}
+.empty h3{font-size:26px;letter-spacing:-.05em;font-weight:750;margin:18px 0 10px}
+.empty p,.board-note{font-size:10px;color:#748263;line-height:1.7}
+.board-note{margin:18px 0 0}
+.score-error{font-size:13px;line-height:1.8;padding:25px 0}
+.ranking-table-wrap{max-height:575px;overflow-y:auto;scrollbar-color:#a4bf73 transparent}
+.ranking-table-wrap thead{position:sticky;top:0;background:#fff;z-index:1}
+.ranking-table-wrap:has(tbody:empty){max-height:none}
+.ranking-cloud{width:330px;right:-50px;top:13px;background-position:50% 50%;opacity:.85;filter:drop-shadow(0 2px 1px #b2def140)}
+.closing{position:relative;isolation:isolate;overflow:hidden;text-align:center;background:linear-gradient(125deg,#369ce7,#63b9ed);padding:97px 6% 140px}
+.closing>p{position:relative;z-index:1;color:var(--cloud);font-size:clamp(37px,5.1vw,73px);font-weight:850;line-height:1.02;letter-spacing:-.055em;margin:0 0 34px}
+.closing>.button{position:relative;z-index:1}
+.closing-cloud-one{width:270px;left:-65px;top:70px;background-position:100% 50%;opacity:.9}
+.closing-cloud-two{width:280px;right:-30px;bottom:90px;background-position:0 50%;opacity:.95}
+footer{display:flex;align-items:center;justify-content:space-between;gap:25px;margin:auto;background:var(--meadow);padding:19px max(6%,calc((100% - 1285px)/2)) 31px;font-size:10px;font-weight:600;color:#3a562e}
+footer .wordmark{font-size:20px;color:var(--ink)}
+footer a:last-child:hover{text-decoration:underline}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.legal-page{background:var(--cloud)}
+.legal-page>.masthead{max-width:none;background:var(--sky);padding-left:max(6%,calc((100% - 1285px)/2));padding-right:max(6%,calc((100% - 1285px)/2))}
+.legal-page main{color:var(--ink)}
+.legal-page h1{color:var(--ink);font-weight:850;letter-spacing:-.055em}
+@media(min-width:1520px){.hero-inner{min-height:720px}}
+@media(max-width:950px){
+ .masthead{padding-top:23px;padding-bottom:23px}.hero-inner{gap:4%;min-height:auto;padding-top:35px;padding-bottom:55px}
+ h1{font-size:clamp(76px,10.7vw,108px)}.eyebrow{font-size:7.5px;letter-spacing:.07em;margin-bottom:24px}.claim{font-size:19px}
+ .hero-actions{gap:14px}.button{gap:20px;padding:15px 19px}.hero-actions .text-link{font-size:10px;gap:12px}
+ .hero-scene{border-width:4px}.cloud-one{width:150px;left:42%}.sun{width:85px;height:85px;top:17%;left:48%}
+ .how{padding-bottom:60px}.instructions{gap:20px}.instruction{gap:12px}.instruction h3{font-size:23px}.step-number{width:40px;height:40px;border-radius:15px}.instruction p{font-size:11px}
+ .ranking{padding-top:75px;padding-bottom:78px}.ranking-inner{gap:7%;grid-template-columns:.92fr 1.1fr}.ranking h2{font-size:74px}.ranking-board{padding:18px}.board-top{gap:10px}.board-top p{font-size:9px}
+ .closing{padding-top:85px}.closing-cloud-one{left:-120px}.closing-cloud-two{right:-120px}
+}
+@media(max-width:620px){
+ .masthead{padding:21px 6%;gap:10px}.wordmark{font-size:20px;gap:7px}.wordmark svg{width:23px;height:25px}nav{gap:17px;font-size:11px}.nav-scores{gap:7px}.nav-play{padding:10px 13px;gap:13px;border-radius:14px;min-height:42px}
+ .hero{padding-bottom:66px}.hero-inner{display:flex;flex-direction:column;align-items:stretch;padding:38px 6% 20px;gap:39px}.hero-copy{padding-bottom:0}.hero .eyebrow{font-size:8px;margin-bottom:25px;letter-spacing:.07em}
+ h1{font-size:clamp(86px,25.5vw,151px);line-height:.85;margin-bottom:24px;letter-spacing:-.055em}.claim{font-size:21px;margin-bottom:27px}.hero-actions{gap:25px}.button{padding:16px 22px;gap:30px;min-height:56px}.hero-actions .text-link{font-size:11px;gap:12px}.play-note{font-size:9px;margin-top:17px}
+ .hero-scene{width:100%;max-width:450px;margin:0 auto;aspect-ratio:.88;border-width:4px;border-radius:44% 44% 24px 24px / 27% 27% 24px 24px}.scene-caption{font-size:7px;right:13px}
+ .cloud-one{width:135px;left:auto;right:-35px;top:5px}.cloud-two{width:160px;left:-35px;bottom:30px}.cloud-three{width:145px;right:-70px;top:43%}.sun{width:76px;height:76px;left:auto;right:-20px;top:46%}
+ .meadow-edge{height:45px}.how{padding:19px 6% 49px}.how .section-label{font-size:8px;letter-spacing:.08em}.how h2{font-size:38px;margin-bottom:29px}.instructions{display:flex;flex-direction:column;gap:25px}.instruction{gap:17px}.step-number{width:43px;height:43px;border-radius:16px}.instruction h3{font-size:25px;margin-bottom:5px}.instruction p{font-size:12px;max-width:none}
+ .ranking{padding:53px 6% 56px}.ranking-inner{display:block}.ranking .section-label{font-size:8px;letter-spacing:.08em;margin-bottom:22px}.ranking h2{font-size:80px;margin-bottom:24px}.ranking-intro>p:not(.section-label){font-size:17px}.ranking-intro .sharing-note{font-size:11px!important;margin-top:19px}.ranking-intro .text-link{margin:4px 0 29px}.ranking-board{padding:18px;border-radius:24px}.board-top{margin-bottom:12px}.board-top p{font-size:9px}.board-note{font-size:9px}.ranking-cloud{width:230px;right:-75px;top:27px;opacity:.55}th:first-child,td:first-child{width:43px}.number{width:74px}td{font-size:13px}
+ .closing{padding:70px 6% 100px}.closing>p{font-size:clamp(34px,8vw,49px);line-height:1.06;margin-bottom:30px}.closing-cloud-one{width:160px;left:-90px;top:23px}.closing-cloud-two{width:165px;right:-75px;bottom:38px}
+ footer{padding:18px 6% 28px;flex-wrap:wrap;gap:15px}footer .wordmark{flex-basis:100%;font-size:20px}footer>span{flex:1;font-size:9px}footer>a:last-child{font-size:9px}
+}
+@media(max-width:350px){h1{font-size:24.2vw}.wordmark{font-size:17px;gap:5px}nav{gap:11px}.nav-scores{white-space:nowrap}.nav-scores span{display:none}.nav-play{gap:9px;padding:9px 11px}.hero-actions{gap:17px}.hero-actions .text-link{font-size:10px;gap:9px}.button{padding-left:19px;padding-right:19px;gap:23px}.hero .eyebrow{font-size:7px}.ranking h2{font-size:72px}.ranking-board{padding:15px}.board-top button{gap:7px;padding:9px 10px}.board-top p{font-size:8px}}
+
+.heritage{background:var(--sunflower);padding:86px 6% 92px}
+.heritage-inner{max-width:1285px;margin:auto;display:grid;grid-template-columns:.92fr 1.15fr;gap:11%;align-items:start}
+.heritage .section-label{font-size:9px;margin-bottom:22px;max-width:310px}
+.heritage h2{font-size:clamp(38px,4.6vw,65px);font-weight:850;line-height:1.03;letter-spacing:-.055em;margin:0;max-width:490px}
+.heritage-copy{max-width:610px;padding-top:1px}
+.heritage-copy p{font-size:16px;line-height:1.8;font-weight:450;letter-spacing:-.015em;margin:0 0 22px;color:#355033;text-wrap:pretty}
+.heritage-copy p:last-child{margin-bottom:0}
+.heritage-copy .heritage-last{font-weight:700;color:var(--ink)}
+@media(max-width:950px){.heritage{padding-top:67px;padding-bottom:71px}.heritage-inner{gap:7%;grid-template-columns:.92fr 1.1fr}.heritage-copy p{font-size:15px}}
+@media(max-width:620px){.heritage{padding:53px 6% 58px}.heritage-inner{display:block}.heritage .section-label{font-size:8px;letter-spacing:.08em;margin-bottom:19px}.heritage h2{font-size:clamp(37px,10vw,53px);margin-bottom:29px}.heritage-copy p{font-size:15px;line-height:1.85;margin-bottom:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.nav-play,.board-top button{transition:none}}
+</style>
+  <script>window.STACK_STONES_SCORES=Object.freeze({"readUrl":"https://stack-stones-scores.jurekpanstrom.chatgpt.site/api/scores","writeUrl":"https://stack-stones-scores.jurekpanstrom.chatgpt.site/api/scores"});
+</script>
+  <script defer>document.addEventListener("DOMContentLoaded",()=>{(() => {
+ const status=document.getElementById('scoreStatus'),refresh=document.getElementById('refreshScores'),rows=document.getElementById('scoreRows'),empty=document.getElementById('emptyScores'),error=document.getElementById('scoreError');
+ let loading=false;
+ function paint(data,snapshot=false){
+  if(!data||!Array.isArray(data.scores)||data.scores.length>100)throw Error('invalid');
+  const entries=data.scores.filter(row=>typeof row.alias==='string'&&Array.from(row.alias).length>=1&&Array.from(row.alias).length<=24&&Number.isSafeInteger(row.stones)&&row.stones>0).sort((a,b)=>b.stones-a.stones);
+  if(snapshot&&!entries.length)throw Error('empty snapshot');
+  const fragment=document.createDocumentFragment();
+  entries.forEach((row,i)=>{const tr=document.createElement('tr');[String(i+1).padStart(2,'0'),row.alias,row.stones.toLocaleString('en-US')].forEach((value,column)=>{const td=document.createElement('td');td.textContent=value;if(column===2)td.className='number';tr.append(td);});fragment.append(tr);});
+  rows.replaceChildren(fragment);empty.hidden=entries.length>0;
+  status.textContent=snapshot?'Saved ranking · Live updates temporarily unavailable':entries.length?`${entries.length} / 100 places · Worldwide`:'Worldwide · No scores yet';
+ }
+ async function loadScores(){
+  if(loading)return;loading=true;refresh.disabled=true;status.textContent='Loading scores…';error.hidden=true;
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);
+  try{
+   const response=await fetch(window.STACK_STONES_SCORES.readUrl,{signal:controller.signal,cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
+   if(!response.ok)throw Error('unavailable');paint(await response.json());
+  }catch{
+   try{const snapshot=await fetch('top100.json',{cache:'no-store',credentials:'omit'});if(!snapshot.ok)throw Error('unavailable');paint(await snapshot.json(),true);}
+   catch{error.hidden=false;empty.hidden=true;status.textContent='Scores are temporarily unavailable.';}
+  }finally{clearTimeout(timeout);loading=false;refresh.disabled=false;}
+ }
+ refresh.addEventListener('click',loadScores);loadScores();
+})();
+});</script>
+<style>
+.export-dialog{margin:0;padding:0;border:0;max-width:none;max-height:none;width:100vw;height:100dvh;overflow:hidden;background:#112720;color:var(--ink)}
+.export-dialog[open]{display:flex;flex-direction:column}
+.export-dialog::backdrop{background:#112720}
+.export-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 16px;min-height:54px;flex:none;background:var(--sky);color:var(--ink);font:750 12px Inter,Arial,sans-serif}
+.export-toolbar button{min-height:36px;padding:8px 15px;border:2px solid var(--control-border);border-radius:13px;background:var(--control-bg);color:var(--control-ink);box-shadow:0 2px 0 var(--control-shadow);font-weight:750}
+.export-toolbar button:hover{background:var(--control-hover)}
+.export-dialog iframe{display:block;min-height:0;width:100%;flex:1;border:0;background:#112720}
+#exportPrivacy{background:var(--cloud)}
+.export-privacy-copy{width:100%;max-width:760px;flex:1;min-height:0;margin:0 auto;padding:24px 6% 44px;overflow:auto}
+.export-privacy-copy h1{font-size:clamp(40px,8vw,65px);color:var(--ink);line-height:1;letter-spacing:-.05em;margin:20px 0 30px}
+.export-privacy-copy h2{font-size:22px;margin:30px 0 12px;letter-spacing:-.03em}
+.export-privacy-copy p{font-size:14px;line-height:1.8;color:#536e54}
+.export-privacy-copy a{text-decoration:underline}
+.export-privacy-copy .section-label{font-size:9px}
+</style></head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="#main" aria-label="Stack Stones home"><svg viewBox="0 0 40 38" aria-hidden="true"><path d="M4 35 7 25 31 24 36 35ZM10 20 13 12 28 13 31 21ZM15 8 17 2 24 2 27 8Z"/></svg><span>Stack Stones</span></a>
+    <nav aria-label="Main navigation"><a class="nav-scores" href="#scores">Top 100 <span aria-hidden="true">↓</span></a><a class="nav-play" href="play/">Play <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-clouds" aria-hidden="true"><span class="cloud cloud-one"></span><span class="cloud cloud-two"></span><span class="cloud cloud-three"></span><span class="sun"></span></div>
+      <div class="hero-inner">
+        <div class="hero-copy"><p class="eyebrow"><span aria-hidden="true"></span>A LITTLE BALANCE. A LONG WAY UP.</p><h1 id="hero-title">Stack<br>Stones<span class="period">.</span></h1><p class="claim">The sky is not the limit.</p><div class="hero-actions"><a class="button" href="play/">Play now <span aria-hidden="true">↗</span></a><a class="text-link" href="#scores">World Top 100 <span aria-hidden="true">↓</span></a></div><p class="play-note">Free to play. Right in your browser.</p></div>
+        <figure class="hero-scene"><img class="scene-image" src="assets/0835abcdc211742893f8.webp" alt="A tower of irregular stones balancing on a boulder in a sunny meadow" width="820" height="1000" fetchpriority="high"><figcaption class="scene-caption">ONE MORE STONE.</figcaption></figure>
+      </div>
+      <svg class="meadow-edge" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44C200 88 375 3 620 27S1100 91 1440 20V80H0Z"/></svg>
+    </section>
+    <section class="how" aria-labelledby="how-title"><div class="how-inner"><p class="section-label">THE ART OF ONE MORE STONE</p><h2 id="how-title">Find your balance.</h2><div class="instructions"><div class="instruction"><span class="step-number">01</span><div><h3>Turn it.</h3><p>Swipe up or down to rotate.</p></div></div><div class="instruction"><span class="step-number">02</span><div><h3>Place it.</h3><p>Slide sideways. Tap to set.</p></div></div><div class="instruction"><span class="step-number">03</span><div><h3>Repeat.</h3><p>Build until gravity says otherwise.</p></div></div></div></div></section>
+    <section class="ranking" id="scores" aria-labelledby="ranking-title">
+      <span class="cloud ranking-cloud" aria-hidden="true"></span>
+      <div class="ranking-inner">
+        <div class="ranking-intro"><p class="section-label">GOOD BALANCE. GREAT COMPANY.</p><h2 id="ranking-title">World<br>Top 100<span class="period">.</span></h2><p>One tower. One direction.<br>No end.</p><p class="sharing-note" id="sharingNote">Share your score after a run.<br>Only if you want to.</p><a class="text-link" href="play/">Build your tower <span aria-hidden="true">↗</span></a></div>
+        <div class="ranking-board"><div class="board-top"><p id="scoreStatus" role="status" aria-live="polite">Loading scores…</p><button id="refreshScores" type="button" aria-label="Refresh leaderboard">Refresh <span aria-hidden="true">↻</span></button></div><div class="ranking-table-wrap"><table><caption class="sr-only">Worldwide stone stacking scores</caption><thead><tr><th scope="col">Rank</th><th scope="col">Alias</th><th scope="col" class="number">Stones</th></tr></thead><tbody id="scoreRows"></tbody></table></div><div id="emptyScores" class="empty" hidden><svg viewBox="0 0 40 38" aria-hidden="true"><path d="M4 35 7 25 31 24 36 35ZM10 20 13 12 28 13 31 21ZM15 8 17 2 24 2 27 8Z"/></svg><h3>Room at the top.</h3><p>The board is waiting for its first tower.</p></div><p id="scoreError" class="score-error" hidden>We couldn’t load the scores. Please try again.</p><p class="board-note">Voluntary sharing. Public aliases. No account needed.</p></div>
+      </div>
+    </section>
+    <section class="heritage" aria-labelledby="heritage-title">
+      <div class="heritage-inner">
+        <div class="heritage-heading"><p class="section-label">A VERY BRIEF HISTORY OF AIMING HIGHER</p><h2 id="heritage-title">An ancient art.<br>A taller ambition.</h2></div>
+        <div class="heritage-copy">
+          <p>Menhirs. Stone circles. Humanity has spent millennia asking stones to do something more interesting than lie on the ground.</p>
+          <p>Raising a stone takes more than muscle. It takes observation, shared techniques and knowledge passed from one pair of hands to the next. Building is a cultural practice: we learn what holds, remember what falls and pass on the difference. Then someone looks at a perfectly respectable pile and imagines it taller.</p>
+          <p>Stack Stones puts this noble inheritance at the service of one more rock. A little accumulated wisdom. A slightly unreasonable ambition. The extraordinary human gift of looking at what already exists and seeing how much further it could go.</p>
+          <p class="heritage-last">Thousands of years of human ingenuity.<br>Surely there’s room for one more stone.</p>
+        </div>
+      </div>
+    </section>
+    <section class="closing" aria-label="Play Stack Stones"><span class="cloud closing-cloud-one" aria-hidden="true"></span><span class="cloud closing-cloud-two" aria-hidden="true"></span><p>Steady hands.<br>Unreasonable ambitions.</p><a class="button" href="play/">One more stone <span aria-hidden="true">↗</span></a><svg class="meadow-edge" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50C240 5 400 63 660 44S1160 2 1440 41V80H0Z"/></svg></section>
+  </main>
+  <footer><a class="wordmark" href="#main">Stack Stones</a><span>The sky is not the limit.</span><a href="privacy.html">Privacy &amp; credits</a></footer>
+<dialog id="exportGame" class="export-dialog" aria-label="Play Stack Stones"><header class="export-toolbar"><button type="button" data-export-close>← Homepage</button><span>Stack Stones</span></header></dialog><dialog id="exportPrivacy" class="export-dialog" aria-label="Privacy and credits"><header class="export-toolbar"><button type="button" data-export-close>← Homepage</button><span>Privacy &amp; credits</span></header><article class="export-privacy-copy"><p class="section-label">PRIVACY &amp; CREDITS</p><h1>Built for balance.</h1><h2>Playing</h2><p>No account is needed. The game keeps your personal best and training progress in your browser’s local storage. These stay on your device. We do not add analytics, advertising, tracking cookies or a persistent online player ID. Fonts, images and audio are served with the game.</p><h2>Sharing a score</h2><p>Sharing is voluntary. When enabled, pressing Submit sends your chosen alias, stone count and a random code for that run to the score service. Only your alias, rank and stone count are shown on the leaderboard. The run code prevents duplicate entries from a retry; it is not a permanent player identifier. Only a hash of that code is kept in the ranking file.</p><p>The live Top 100 is kept in a small JSON file in managed Cloudflare storage. A public snapshot is also kept in the game’s GitHub repository. Public aliases and scores may remain in Git history after leaving the Top 100. Use a pseudonym rather than your real name or email address. Scores are submitted by the browser and are not independently verified.</p><h2>Hosting</h2><p>GitHub Pages and the ranking service may process connection details such as IP addresses for operation and security. The game itself does not add IP addresses to the ranking file. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement">GitHub’s privacy statement</a> and, <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare’s privacy policy</a>.</p><h2>Credits</h2><p>Game: Stack Stones. Typeface: Inter by Rasmus Andersson. The game retains its original meadow artwork and procedural stone materials. Meadow ambience source: “Morning birdsong ambience” by strachszydlo on Pixabay, edited for the game.</p><p><a href="./">← Back to Stack Stones</a></p></article></dialog><script>(()=>{
+ const gameDialog=document.getElementById('exportGame'),privacyDialog=document.getElementById('exportPrivacy');
+ function openGame(event){
+  event.preventDefault();
+  if(gameDialog.open)return;
+  const frame=document.createElement('iframe');frame.title='Stack Stones';frame.allow='autoplay; fullscreen';
+  frame.src='play/index.html';gameDialog.append(frame);gameDialog.showModal();frame.focus();
+ }
+ for(const link of document.querySelectorAll('a[href="play/"]'))link.addEventListener('click',openGame);
+ for(const link of document.querySelectorAll('a[href="privacy.html"]'))link.addEventListener('click',event=>{event.preventDefault();privacyDialog.showModal();});
+ for(const button of document.querySelectorAll('[data-export-close]'))button.addEventListener('click',()=>button.closest('dialog').close());
+ gameDialog.addEventListener('close',()=>{gameDialog.querySelector('iframe')?.remove();});
+ privacyDialog.addEventListener('click',event=>{if(event.target.closest('a[href="./"]')){event.preventDefault();privacyDialog.close();}});
+})();</script></body>
+</html>
